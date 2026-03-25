@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cuenta Eliminada</title>
+</head>
+<body>
+<div style="font-family: Arial, sans-serif; color: #333;">
+    <h2>¡Adiós de parte de NexU!</h2>
+    <p>Hola <strong th:text="${usuario}"></strong>,</p>
+    <p>Hemos procesado la eliminación de tu cuenta correctamente. Lamentamos verte partir.</p>
+    <img th:src="'cid:' + ${imgBye}" alt="Goodbye" style="max-width: 100%; height: auto;" />
+    <p>Si esta acción no fue realizada por ti, por favor contáctanos de inmediato.</p>
+    <p>Gracias por haber sido parte de NexU.</p>
+</div>
+</body>
+</html>

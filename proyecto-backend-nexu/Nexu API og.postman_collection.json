@@ -1,0 +1,2315 @@
+{
+	"info": {
+		"_postman_id": "355f023a-08a4-4741-84ca-55b377def0f8",
+		"name": "Nexu API",
+		"description": "StartFragment\n\n**Nota para pruebas del endpoint de imágenes**\n\nPor motivos de testeo, al probar el endpoint de **Pictures**, se mostrará un ícono de advertencia junto a una nube que indica la necesidad de subir un archivo. Como usuario, deberá hacer clic sobre dicho ícono, seleccionar una imagen desde su equipo local y, una vez cargada, proceder con la prueba del endpoint.\n\nEsta funcionalidad simula el proceso de carga de imágenes desde archivos locales, tal como ocurriría en un entorno real de uso.\n\n**Nota para correcto testing en general**\n\nPor motivos de practicidad, las consultas en Postman deben ejecutarse de forma secuencial para garantizar su correcto funcionamiento. Si se hacen de forma aleatoria, endpoint's que requieren de una configuración previa podrían no funcionar, por ejemplo el `registro` de un usuario es primordial para poder ejecutar la mayoría, o en su defecto, todos los endpoint.\n\n**Nota para correcto testing en localhost**\n\nEs importante tener en cuenta que la base de datos está configurada en modo `create-drop`, lo que significa que se reinicia completamente en cada ejecución. Por ello, es posible que algunos usuarios u otros objetos aún no existan si no se han creado previamente en el orden esperado.\n\n**Nota para correcto testing en deployment**\n\nCon respecto al _deployment_, en `variables` es posible modificar entre usar la IP local o la del deployment, según se requiera. Es importante tener en cuenta que, debido a las limitaciones de AWS Academy, los tokens de acceso a S3 no estarán actualizados. Por esta razón, los _endpoints_ relacionados con imágenes (pictures) generarán errores al intentar acceder a ellos. Para verificar el correcto funcionamiento del _deployment_, se recomienda probar con _endpoints_ más simples, como los de `users` o `places`.\n\nConsidere también que al ser una base de datos en la nube, hay credenciales que no puede repetir, por ejemplo usar el mismo email al registrarse. Se recomiendo cambiar esto en los `body` cuando se vaya a probar el registro de `users`.\n\nEndFragment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43481753",
+		"_collection_link": "https://paulo-3457731.postman.co/workspace/PostmanCollectionHackathon1~441b2e86-7985-4eff-ad96-b407ef8cfa60/collection/43481753-355f023a-08a4-4741-84ca-55b377def0f8?action=share&source=collection_link&creator=43481753"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Crear Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"var token = response.token;\r",
+									"pm.collectionVariables.set(\"userToken\", token);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"nex2u_tester@nomrista.com\",\n  \"name\": \"empieza ya\",\n  \"password\": \"otroMomentomas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Usuario 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"var token = response.token;\r",
+									"pm.collectionVariables.set(\"userToken2\", token);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"example@gmail.com\",\n  \"name\": \"user2\",\n  \"password\": \"otroMomentomas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"nex2u_tester@nomrista.com\",\n    \"password\": \"otroMomentomas\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Usuario 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"example@gmail.com\",\n    \"password\": \"otroMomentomas\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Usuario Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"var token = response.token;\r",
+									"pm.collectionVariables.set(\"adminToken\", token);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@nexu.com\",\n  \"name\": \"Administrador\",\n  \"password\": \"admin123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Usuario por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todos los Usuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Usuario2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"updated@example.com\",\n  \"name\": \"actualizado\",\n  \"password\": \"otroMomentomas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/4",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Usuario 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"var token = response.token;\r",
+									"pm.collectionVariables.set(\"userToken3\", token);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"example@gmail.com\",\n  \"name\": \"user3\",\n  \"password\": \"otroMomentomas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Usuario 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"example@gmail.com\",\n  \"password\": \"otroMomentomas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuario 3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken3}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Places To Eat",
+			"item": [
+				{
+					"name": "Crear Lugar para Comer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Café Central\",\n  \"address\": \"Av. Siempre Viva 123\",\n  \"latitude\": -12.04318,\n  \"longitude\": -77.02824,\n  \"payment\": \"CARD\",\n  \"openTime\": \"08:00\",\n  \"closeTime\": \"22:00\",\n  \"description\": \"Un café acogedor con Wi-Fi y opciones veganas.\",\n  \"wifi\": true,\n  \"priceRange\": \"$$\",\n  \"estimatedPrice\": 25.0,\n  \"capacity\": 30,\n  \"status\": \"OPEN\",\n  \"labelIds\": [1, 2, 3],\n  \"placeCategoryToEat\": \"COFFEE\",\n  \"typeRestaurant\": \"CRIOLLO\",\n  \"deliveryRestaurant\": null,\n  \"typeCoffee\": \"VEGANA\",\n  \"deliveryCoffee\": true,\n  \"menu\": \"https://mimenu.com/cafe-central\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/places-to-eat",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-eat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Lugar para Comer - 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Café Horizonte\",\n  \"address\": \"Jr. Amanecer 456, Miraflores\",\n  \"latitude\": -12.12045,\n  \"longitude\": -77.03289,\n  \"payment\": \"CARD\",\n  \"openTime\": \"07:30\",\n  \"closeTime\": \"21:30\",\n  \"description\": \"Un rincón tranquilo con café orgánico y espacios para trabajar.\",\n  \"wifi\": false,\n  \"priceRange\": \"$\",\n  \"estimatedPrice\": 18.5,\n  \"capacity\": 28,\n  \"status\": \"OPEN\",\n  \"labelIds\": [4, 5, 6],\n  \"placeCategoryToEat\": \"COFFEE\",\n  \"typeRestaurant\": \"CRIOLLO\",\n  \"deliveryRestaurant\": null,\n  \"typeCoffee\": \"VEGANA\",\n  \"deliveryCoffee\": true,\n  \"menu\": \"https://mimenu.com/cafe-horizonte\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/places-to-eat",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-eat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Lugar por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-eat/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-eat",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todos los Lugares",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-eat",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-eat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Lugar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Café Central\",\n  \"address\": \"Av. Siempre Viva 123\",\n  \"latitude\": -12.04318,\n  \"longitude\": -77.02824,\n  \"payment\": \"CARD\",\n  \"openTime\": \"08:00\",\n  \"closeTime\": \"17:00\",\n  \"description\": \"Un café acogedor con Wi-Fi y opciones veganas.\",\n  \"wifi\": false,\n  \"priceRange\": \"$$\",\n  \"estimatedPrice\": 25.0,\n  \"capacity\": 30,\n  \"status\": \"CLOSE\",\n  \"labelIds\": [1, 2, 3],\n  \"placeCategoryToEat\": \"COFFEE\",\n  \"typeRestaurant\": \"CRIOLLO\",\n  \"deliveryRestaurant\": null,\n  \"typeCoffee\": \"VEGANA\",\n  \"deliveryCoffee\": true,\n  \"menu\": \"https://mimenu.com/cafe-central\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/places-to-eat/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-eat",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Lugar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-eat/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-eat",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Lugares",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-eat/search?status=OPEN",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-eat",
+								"search"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "OPEN"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar a Favoritos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-eat/1/favorite?userId=3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-eat",
+								"1",
+								"favorite"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Favoritos por Usuario Bef",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-eat/user/3/favorites",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-eat",
+								"user",
+								"3",
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar de Favoritos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-eat/1/favorite?userId=3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-eat",
+								"1",
+								"favorite"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Favoritos por Usuario Aft",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-eat/user/3/favorites",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-eat",
+								"user",
+								"3",
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lugares Abiertos Ahora",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-eat/open-actually",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-eat",
+								"open-actually"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lugares Turno Noche",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-eat/night-shift",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-eat",
+								"night-shift"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Places To Fun",
+			"item": [
+				{
+					"name": "Crear Lugar para Diversión",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Parque de la Alegría\",\n  \"address\": \"Av. Diversión 456\",\n  \"latitude\": -12.12345,\n  \"longitude\": -77.54321,\n  \"payment\": \"CASH\",\n  \"openTime\": \"10:00\",\n  \"closeTime\": \"22:00\",\n  \"description\": \"Parque con áreas verdes, juegos para niños y zona de picnic.\",\n  \"wifi\": false,\n  \"priceRange\": \"$$\",\n  \"estimatedPrice\": 15.0,\n  \"capacity\": 200,\n  \"status\": \"OPEN\",\n  \"labelIds\": [4, 5],\n  \"placeCategoryToFun\": \"PARK\",\n  \"games\": [\"Columpios\", \"Tobogán\", \"Mesa de Ping Pong\"],\n  \"priceFicha\": 0.0,\n  \"sizePark\": \"REGULAR\",\n  \"haveGames\": true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/places-to-fun",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-fun"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Lugar para Diversión 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Sala Gamer Xtreme\",\n  \"address\": \"Calle Juegos 789\",\n  \"latitude\": -12.34567,\n  \"longitude\": -77.67890,\n  \"payment\": \"CARD\",\n  \"openTime\": \"12:00\",\n  \"closeTime\": \"02:00\",\n  \"description\": \"Centro de juegos con PCs, consolas y realidad virtual.\",\n  \"wifi\": true,\n  \"priceRange\": \"$$$\",\n  \"estimatedPrice\": 40.0,\n  \"capacity\": 100,\n  \"status\": \"OPEN\",\n  \"labelIds\": [7, 8, 9],\n  \"placeCategoryToFun\": \"GAMES\",\n  \"games\": [\n    \"PC Gaming\",\n    \"Consolas PlayStation\",\n    \"Realidad Virtual\",\n    \"Simuladores de Carreras\"\n  ],\n  \"priceFicha\": 5.0,\n  \"sizePark\": \"SMALL\",\n  \"haveGames\": true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/places-to-fun",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-fun"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Lugar por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-fun/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-fun",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todos los Lugares",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-fun",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-fun"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Lugar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Parque de la Alegría\",\n  \"address\": \"Calle Falsa 123\",\n  \"latitude\": -12.12345,\n  \"longitude\": -77.54321,\n  \"payment\": \"CASH\",\n  \"openTime\": \"09:30\",\n  \"closeTime\": \"21:00\",\n  \"description\": \"Amplias áreas verdes con juegos infantiles y espacios para picnic familiar.\",\n  \"wifi\": false,\n  \"priceRange\": \"$$\",\n  \"estimatedPrice\": 15.0,\n  \"capacity\": 200,\n  \"status\": \"OPEN\",\n  \"labelIds\": [4, 5],\n  \"placeCategoryToFun\": \"PARK\",\n  \"games\": [\"Columpios\", \"Tobogán\", \"Mesa de Ping Pong\"],\n  \"priceFicha\": 0.0,\n  \"sizePark\": \"REGULAR\",\n  \"haveGames\": true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/places-to-fun/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-fun",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Lugar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-fun/4",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-fun",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Lugares",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-fun/search?status=OPEN",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-fun",
+								"search"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "OPEN"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar a Favoritos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-fun/3/favorite?userId=3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-fun",
+								"3",
+								"favorite"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Favoritos por Usuario Bef",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-fun/user/3/favorites",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-fun",
+								"user",
+								"3",
+								"favorites"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar de Favoritos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-fun/3/favorite?userId=3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-fun",
+								"3",
+								"favorite"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Favoritos por Usuario Aft",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-fun/user/3/favorites",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-fun",
+								"user",
+								"3",
+								"favorites"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lugares Abiertos Ahora",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-fun/open-actually",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-fun",
+								"open-actually"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lugares Turno Noche",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/places-to-fun/night-shift",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"places-to-fun",
+								"night-shift"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Crear Reseña",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"comment\": \"El lugar fue excelente, muy recomendado\",\n  \"rating\": 5,\n  \"pictures\": []\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reviews?placeId=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reviews"
+							],
+							"query": [
+								{
+									"key": "placeId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Reseña 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"comment\": \"El lugar fue terrible, nada recomendado\",\n  \"rating\": 5,\n  \"pictures\": []\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reviews?placeId=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reviews"
+							],
+							"query": [
+								{
+									"key": "placeId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Reseña por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reviews/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reviews",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Reseña",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"comment\": \"Actualizado\",\n  \"rating\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reviews/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reviews",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Reseña",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reviews/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reviews",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reseñas por Usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reviews/user/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reviews",
+								"user",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reseñas por Lugar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reviews/place/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reviews",
+								"place",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aumentar Likes de Reseña",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reviews/1/like",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reviews",
+								"1",
+								"like"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pictures",
+			"item": [
+				{
+					"name": "Subir Imágenes para Lugar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/C:/Users/paulo/Downloads/86final.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pictures/place?placeId=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pictures",
+								"place"
+							],
+							"query": [
+								{
+									"key": "placeId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subir Imágenes para Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/C:/Users/paulo/Downloads/86final.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pictures/review?reviewId=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pictures",
+								"review"
+							],
+							"query": [
+								{
+									"key": "reviewId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Imágenes por Lugar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pictures/place?placeId=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pictures",
+								"place"
+							],
+							"query": [
+								{
+									"key": "placeId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Imágenes por Review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pictures/review?reviewId=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pictures",
+								"review"
+							],
+							"query": [
+								{
+									"key": "reviewId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Plans",
+			"item": [
+				{
+					"name": "Crear Plan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Plan de ejemplo\",\n  \"description\": \"Este es un plan de prueba\",\n  \"startDate\": \"2025-06-01\",\n  \"endDate\": \"2025-06-10\",\n  \"visibility\": \"PRIVATE\",\n  \"placesId\": [1],\n  \"usersId\": [1]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/plans",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Plan por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/plans/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plans",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Plan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Plan actualizado\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/plans/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plans",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Plan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/plans/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plans",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Mis Planes por Usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/plans/me/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"plans",
+								"me",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Maps",
+			"item": [
+				{
+					"name": "Obtener Ruta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/maps/route?origin=Lima&destination=Callao&mode=driving",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"maps",
+								"route"
+							],
+							"query": [
+								{
+									"key": "origin",
+									"value": "Lima"
+								},
+								{
+									"key": "destination",
+									"value": "Callao"
+								},
+								{
+									"key": "mode",
+									"value": "driving"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Lugares (Texto)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/maps/search?query=tienda&lat=-12.121081&lng=-77.029808&radius=1000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"maps",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "tienda"
+								},
+								{
+									"key": "lat",
+									"value": "-12.121081"
+								},
+								{
+									"key": "lng",
+									"value": "-77.029808"
+								},
+								{
+									"key": "radius",
+									"value": "1000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lugares Cercanos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/maps/nearby?lat=-12.121081&lng=-77.029808&radius=1000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"maps",
+								"nearby"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "-12.121081"
+								},
+								{
+									"key": "lng",
+									"value": "-77.029808"
+								},
+								{
+									"key": "radius",
+									"value": "1000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Labels",
+			"item": [
+				{
+					"name": "Crear una etiqueta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Family friendly\",\r\n  \"description\": \"Entretenimiento sano\",\r\n  \"color\": \"#FF0000\",\r\n  \"status\": \"ACTIVE\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/labels",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"labels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear una etiqueta - 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Family friendly\",\r\n  \"description\": \"Entretenimiento sano\",\r\n  \"color\": \"#FF0000\",\r\n  \"status\": \"ACTIVE\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/labels",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"labels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todas las etiquetas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/labels",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"labels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener una etiqueta por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/labels/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"labels",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar una etiqueta",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/labels/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"labels",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar una etiqueta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Importante\",\r\n  \"description\": \"Etiqueta para elementos importantes\",\r\n  \"color\": \"#FFA500\",\r\n  \"status\": \"INACTIVE\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/labels/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"labels",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asignar una etiqueta a un lugar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{userToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/labels/2/assign-to-place/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"labels",
+								"2",
+								"assign-to-place",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://34.229.132.147:8080",
+			"type": "default",
+			"disabled": true
+		},
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "userToken",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "adminToken",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "userToken2",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userToken3",
+			"value": ""
+		}
+	]
+}

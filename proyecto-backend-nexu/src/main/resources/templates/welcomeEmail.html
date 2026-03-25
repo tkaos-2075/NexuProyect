@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenido a NexU</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 40px; color: #333;">
+
+<div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 8px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+
+    <h2 style="color: #2c3e50;">¡Hola, <span th:text="${usuario}">usuario@example.com</span>! 👋</h2>
+
+    <p>¡Bienvenido a <strong>NexU</strong>! 🎉</p>
+
+    <p>Gracias por registrarte. Estamos encantados de que te unas a nuestra comunidad. Desde ahora podrás explorar lugares increíbles, dejar tus reseñas y descubrir nuevas experiencias.</p>
+
+    <div style="text-align: center; margin: 30px 0;">
+        <img th:src="'cid:' + ${imgWelcome}" alt="Imagen de bienvenida" style="max-width: 100%; border-radius: 6px;" />
+    </div>
+
+    <p style="margin-top: 30px;">Si tienes alguna pregunta, no dudes en escribirnos. ¡Estamos para ayudarte!</p>
+
+    <p>Saludos,<br>El equipo de NexU 💚</p>
+
+    <div style="margin-top: 40px; text-align: center;">
+        <p style="font-size: 12px; color: #999;">Este mensaje fue enviado automáticamente. Por favor, no respondas a este correo.</p>
+    </div>
+</div>
+
+</body>
+</html>

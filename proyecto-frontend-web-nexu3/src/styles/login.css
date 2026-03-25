@@ -1,0 +1,184 @@
+/* Estilos específicos para el sistema de login */
+
+/* Variables específicas para login */
+:root {
+  --login-glass-bg: rgba(79, 195, 247, 0.25);
+  --login-glass-border: rgba(79, 195, 247, 0.4);
+  --login-input-bg: rgba(255, 255, 255, 0.15);
+  --login-input-border: rgba(255, 255, 255, 0.3);
+  --login-error-color: #f87171;
+  --login-success-color: #4ade80;
+}
+
+/* Modo oscuro para login */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --login-glass-bg: rgba(15, 20, 25, 0.8);
+    --login-glass-border: rgba(29, 161, 242, 0.3);
+    --login-input-bg: rgba(255, 255, 255, 0.05);
+    --login-input-border: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Contenedor del formulario de login */
+.login-form-container {
+  backdrop-filter: blur(20px);
+  background: var(--login-glass-bg);
+  border: 1px solid var(--login-glass-border);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+/* Campos de entrada del formulario */
+.login-input {
+  background: var(--login-input-bg);
+  border: 1px solid var(--login-input-border);
+  transition: all 0.3s ease;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+.login-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.login-input:focus {
+  outline: none;
+  background: rgba(79, 195, 247, 0.3);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(29, 161, 242, 0.15);
+}
+
+.login-input.error {
+  border-color: var(--login-error-color);
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.1);
+}
+
+/* Botón de login */
+.login-button {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-accent) 100%);
+  transition: all 0.3s ease;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.login-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(29, 161, 242, 0.3);
+}
+
+.login-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Animación de carga */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Efectos de hover para enlaces */
+.login-link {
+  transition: all 0.3s ease;
+  color: rgba(59, 130, 246, 0.8);
+  text-decoration: none;
+}
+
+.login-link:hover {
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+/* Modo oscuro para enlaces */
+@media (prefers-color-scheme: dark) {
+  .login-link {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .login-link:hover {
+    color: var(--color-primary-light);
+  }
+}
+
+/* Mensajes de error */
+.login-error {
+  color: var(--login-error-color);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Botones sociales */
+.social-login-button {
+  background: var(--login-input-bg);
+  border: 1px solid var(--login-input-border);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.social-login-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Separador */
+.login-separator {
+  position: relative;
+  margin: 2rem 0;
+}
+
+.login-separator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--login-input-border);
+}
+
+.login-separator span {
+  position: relative;
+  background: transparent;
+  padding: 0 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-form-container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .social-login-button {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.875rem;
+  }
+} 

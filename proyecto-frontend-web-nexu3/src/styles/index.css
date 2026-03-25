@@ -1,0 +1,73 @@
+/* Importar estilos específicos */
+@import './components.css';
+@import './login.css';
+@import './register.css';
+@import './welcome-page.css';
+@import './dashboard.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--color-background: #FFFFFF;
+	--color-primary: #1DA1F2;
+	--color-secondary: #E1E8ED;
+	--color-tertiary: #14171A;
+	
+	/* Paleta expandida para mejor armonía */
+	--color-primary-light: #4FC3F7;
+	--color-primary-dark: #0288D1;
+	--color-primary-accent: #00BCD4;
+	
+	--color-secondary-light: #F5F8FA;
+	--color-secondary-dark: #B0BEC5;
+	
+	--color-accent: #FF6B35;
+	--color-accent-light: #FF8A65;
+	--color-accent-dark: #E64A19;
+	
+	--color-success: #4CAF50;
+	--color-warning: #FF9800;
+	--color-error: #F44336;
+	
+	/* Gradientes */
+	--gradient-primary: linear-gradient(135deg, #1DA1F2 0%, #00BCD4 100%);
+	--gradient-secondary: linear-gradient(135deg, #E1E8ED 0%, #F5F8FA 100%);
+	--gradient-accent: linear-gradient(135deg, #FF6B35 0%, #FF8A65 100%);
+	--gradient-hero: linear-gradient(135deg, #1DA1F2 0%, #4FC3F7 50%, #00BCD4 100%);
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-background: #0F1419;
+		--color-primary: #1DA1F2;
+		--color-secondary: #1E293B;
+		--color-tertiary: #F8FAFC;
+		
+		--color-primary-light: #4FC3F7;
+		--color-primary-dark: #0288D1;
+		--color-primary-accent: #00BCD4;
+		
+		--color-secondary-light: #334155;
+		--color-secondary-dark: #475569;
+		
+		--color-accent: #FF6B35;
+		--color-accent-light: #FF8A65;
+		--color-accent-dark: #E64A19;
+		
+		--color-success: #4CAF50;
+		--color-warning: #FF9800;
+		--color-error: #F44336;
+		
+		--gradient-primary: linear-gradient(135deg, #1DA1F2 0%, #00BCD4 100%);
+		--gradient-secondary: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+		--gradient-accent: linear-gradient(135deg, #FF6B35 0%, #FF8A65 100%);
+		--gradient-hero: linear-gradient(135deg, #0F1419 0%, #1E293B 50%, #334155 100%);
+	}
+}
+
+.dark-bg-custom {
+  background-color: #0a1929 !important;
+}
